@@ -1,0 +1,37 @@
+<h2>Check out this photo!</h2>
+
+<div class = "photo">
+<%= image_tag(@photo.image, width: "30%", height: "30%") %>
+</div>
+<div class = "caption">
+<%= @photo.caption %>
+</div>
+<div class = "hashes">
+<% @hashtags.each do |hashtag| %>
+	<%= link_to hashtag.text, hashtag_path(hashtag.id) %>
+<% end %>
+</div>
+<div class = "buttons">	
+<%= link_to "Home", photos_path %>
+<%= link_to "Edit", edit_photo_path(@photo.id) %>
+<%= link_to "Delete", photo_path(@photo), method: :delete, data: {confirm: "Are you sure you want to delete your picture?"} %>
+</div>
+<div class = "like">
+<p><%= button_to "Like", like_photo_path(@photo), method: :get %>
+<%= @photo.likes %> </p>
+</div>
+<h2>Comments</h2>
+<div class = "comments">
+<% @photo.comments.each do |comment| %>
+	<p>
+		<strong>Comment: </strong>	
+		<%= comment.body %>
+	</p>
+	
+<% end %>
+
+<%= render 'comments/comments' %>
+
+</div>
+
+
